@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include "graphics/Mesh.h"
 
 // Namespaces
 using namespace cg3d;
@@ -8,7 +8,7 @@ using namespace cg3d;
 #include <gtc/type_ptr.hpp>
 
 #ifndef _SHADERPROGAM_H_ 
-	#include "ShaderProgram.h"
+	#include "graphics/ShaderProgram.h"
 #endif // _SHADERPROGRAM_H_
 
 #ifndef __UTILITIES_H_

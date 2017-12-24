@@ -1,4 +1,4 @@
-#include "ShaderProgram.h"
+#include "graphics/ShaderProgram.h"
 
 // Namespaces
 using namespace cg3d;

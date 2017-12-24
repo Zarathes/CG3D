@@ -20,12 +20,16 @@
 	#include <algorithm>
 #endif // _ALGORITHM_
 
+#ifndef __INPUTMANAGER_H_
+	#include "systems/InputManager.h"
+#endif // !__INPUTMANAGER_H_
+
 #ifndef __SHADERPROGAM_H_ 
-	#include "ShaderProgram.h"
+	#include "graphics/ShaderProgram.h"
 #endif // _SHADERPROGRAM_H_
 
 #ifndef __MESH_H_
-	#include "Mesh.h"
+	#include "graphics/Mesh.h"
 #endif // __MESH_H_
 
 #ifndef __UTILITIES_H_
@@ -40,13 +44,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	}
-}
-
-
-int main(void)
-{
-	Application* app = new Application();
-	delete app;
 }
 
 Application::Application()
@@ -75,7 +72,7 @@ void Application::Initialize()
 	glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
 	glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
 	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
-	_window = glfwCreateWindow(1920, 1080, "CG3D", NULL, NULL);
+	_window = glfwCreateWindow(1920*2, 1080*2, "CG3D", NULL, NULL);
 //	glfwSetKeyCallback(window, key_callback);
 
 	glfwGetWindowSize(_window, &_screen_width, &_screen_height);
@@ -91,7 +88,8 @@ void Application::Initialize()
 
 	std::cout << glGetString(GL_VERSION) << std::endl;
 
-
+	_inputManager = new cg3d::InputManager();
+	//_inputManager->SetFocussedWindow(_window);
 	_program = new cg3d::ShaderProgram("res/shaders/Basic.shader");
 	_cube = new cg3d::Mesh(_program);
 	cg3d::MeshData data = {
@@ -117,16 +115,17 @@ void Application::Initialize()
 }
 void Application::GameLoop()
 {
-	int frames = 0;
+		
 	float t = 0.0f;
 	float dt = 1.0f / 60.0f;
+	_frames = 0;
 
 	float currentTime = (float)glfwGetTime();
 	
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(_window))
 	{
-		frames++;
+		_frames++;
 		float newTime = (float)glfwGetTime();
 		float frameTime = newTime - currentTime;
 		currentTime = newTime;
@@ -152,16 +151,16 @@ void Application::GameLoop()
 
 		if (t >= 1.0f)
 		{
-			std::cout << "fps: " << frames <<  " ms: " << 1000.0f / frames  <<  std::endl;
+			std::cout << "fps: " << _frames <<  " ms: " << 1000.0f / _frames <<  std::endl;
 			t -= 1.0f;
-			frames = 0;
+			_frames = 0;
 		}
 	}
 
 }
 void Application::ProcessInput()
 {
-
+	_inputManager->ProcessInput();
 }
 void Application::Update(float dt)
 {	

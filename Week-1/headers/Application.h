@@ -12,6 +12,7 @@ typedef struct GLFWwindow GLFWwindow;
 #include <glm.hpp>
 
 namespace cg3d {
+	class InputManager;
 	class ShaderProgram;
 	class Mesh;
 }
@@ -31,6 +32,7 @@ private:
 
 	GLFWwindow*			_window;
 
+	int					_frames;
 	int					_screen_width;
 	int					_screen_height;
 	float				_aspect;
@@ -38,6 +40,7 @@ private:
 	glm::mat4			_proj;
 	glm::mat4			_view;
 
+	cg3d::InputManager	*_inputManager;
 	cg3d::ShaderProgram *_program;
 	cg3d::Mesh	        *_cube;
 	cg3d::Mesh	        *_cube2;
