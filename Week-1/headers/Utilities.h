@@ -1,15 +1,6 @@
 #pragma once
-#ifndef __UTILITIES_H_
-#define __UTILITIES_H_
-
-#ifndef _glfw3_h_
-	#include <GLFW\glfw3.h>
-#endif // !_glfw3_h_
-
-#ifndef _IOSTREAM_
-	#include <iostream>
-#endif // !_IOSTREAM_
-
+#ifndef UTILITIES_H_
+#define UTILITIES_H_
 
 #define ASSERT(x) if (!(x)) __debugbreak();
 #define GLCall(x) GLClearError();\
@@ -30,4 +21,4 @@ static bool GLLogCall(const char* function, const char* file, int line)
 	}
 	return true;
 }
-#endif // !__UTILITIES_H_
+#endif // !UTILITIES_H_

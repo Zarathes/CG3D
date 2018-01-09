@@ -3,38 +3,34 @@
 using namespace cg3d;
 
 // Additional includes
-#ifndef _glfw3_h_
-	#include <GLFW\glfw3.h>
-#endif // !_glfw3_h_
-
-#ifndef  _IOSTREAM_
-	#include <iostream>
-#endif // ! _IOSTREAM_
 
 InputManager::InputManager()
 {
-	_rawInput = std::vector<GLuint>();
 }
 InputManager::~InputManager()
 {
 }
 
-void InputManager::ProcessInput()
+void InputManager::ChangeControlScheme(std::vector<int> keyConfig)
 {
-	if (!_rawInput.empty())
-	{
-		std::cout << "Key Input ";
-		for (size_t i = 0; i < _rawInput.size(); i++)
-		{	
-			std::cout << (char)_rawInput.at(i);
-		}
-		std::cout << std::endl;
-
-		_rawInput.clear();
-	}
+	_keyConfig = keyConfig;
 }
 
-void InputManager::CharacterCallback(GLFWwindow* window, GLuint codepoint)
+std::vector<std::pair<int, int>> InputManager::ProcessRawInput(std::vector<KeyStroke> rawInput)
 {
-	_rawInput.push_back(codepoint);
+	if (!rawInput.empty())
+	{
+		for (size_t i = 0; i < rawInput.size(); i++)
+		{	
+			_keyMap[rawInput.at(i)._key] = rawInput.at(i)._action;
+		}
+	}
+
+	std::vector<std::pair<int, int>> keyInput;
+	for each (int key in _keyConfig)
+	{
+		keyInput.push_back(std::make_pair(key, _keyMap[key]));
+	}
+
+	return keyInput;
 }

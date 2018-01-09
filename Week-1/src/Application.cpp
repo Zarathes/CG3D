@@ -1,40 +1,25 @@
 ﻿#include "Application.h"
 
 // Additional includes
-#ifndef __glew_h__
-	#include <glew.h>
-#endif // !__glew_h__
-
-#ifndef _glfw3_h_
-	#include <GLFW\glfw3.h>
-#endif // !_glfw3_h_
-
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-#ifndef _IOSTEAM_ 
-	#include <iostream>
-#endif // _IOSTEAM_
 #ifndef _ALGORITHM_
 	#include <algorithm>
 #endif // _ALGORITHM_
 
-#ifndef __INPUTMANAGER_H_
+#ifndef INPUTMANAGER_H_
 	#include "systems/InputManager.h"
-#endif // !__INPUTMANAGER_H_
+#endif // !INPUTMANAGER_H_
 
-#ifndef __SHADERPROGAM_H_ 
+#ifndef SHADERPROGAM_H_ 
 	#include "graphics/ShaderProgram.h"
-#endif // _SHADERPROGRAM_H_
+#endif // !SHADERPROGRAM_H_
 
-#ifndef __MESH_H_
+#ifndef MESH_H_
 	#include "graphics/Mesh.h"
-#endif // __MESH_H_
-
-#ifndef __UTILITIES_H_
-	#include "Utilities.h"
-#endif // __UTILITIES_H_
+#endif // !MESH_H_
 
 #include <assert.h>
 
@@ -90,7 +75,6 @@ void Application::Initialize()
 
 	_inputManager = new cg3d::InputManager();
 	//_inputManager->SetFocussedWindow(_window);
-	_program = new cg3d::ShaderProgram("res/shaders/Basic.shader");
 	_cube = new cg3d::Mesh(_program);
 	cg3d::MeshData data = {
 		glm::vec3(2.0f, 2.0f, -5.0f),
@@ -160,7 +144,7 @@ void Application::GameLoop()
 }
 void Application::ProcessInput()
 {
-	_inputManager->ProcessInput();
+	//_inputManager->ProcessInput();
 }
 void Application::Update(float dt)
 {	

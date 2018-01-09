@@ -1,20 +1,29 @@
 #pragma once
-#ifndef _GAMESCENE_H_
-#define _GAMESCENE_H_
+#ifndef GAMESCENE_H_
+#define GAMESCENE_H_
 
-#ifndef __SCENEMANAGEGER_H_
+#ifndef SCENEMANAGEGER_H_
 	#include "systems/SceneManager.h"
-#endif // !__SCENEMANAGEGER_H_
+#endif // !SCENEMANAGEGER_H_
 
 namespace cg3d 
 {
+	class Engine;
+
 	class GameScene : public Scene
 	{
 	private:
+		Engine		*_deletage;
 	public:
-		GameScene();
+		GameScene(Engine* delegate);
 		~GameScene();
+
+		void Load();
+		void ProcessInput(std::vector<std::pair<int, int>> input);
+		void Update(float delta);
+		void Redraw();
+		void Unload();
 	};
 }
 
-#endif // !_GAMESCENE_H_
+#endif // !GAMESCENE_H_

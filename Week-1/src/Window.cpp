@@ -4,19 +4,10 @@
 using namespace cg3d;
 
 // Additional includes
-#ifndef __glew_h__
-#include <glew.h>
-#endif // !__glew_h__
-
-#ifndef _glfw3_h_
-	#include <GLFW\glfw3.h>
-#endif // !_glfw3_h_
-
-#ifndef __INPUTMANAGER_H_
+#ifndef INPUTMANAGER_H_
 	#include "systems/InputManager.h"
-#endif // !__INPUTMANAGER_H_
+#endif // !INPUTMANAGER_H_
 
-#include <iostream>
 
 void Window::OnResize(GLFWwindow* window, int width, int height)
 {
@@ -27,7 +18,12 @@ void Window::OnResize(GLFWwindow* window, int width, int height)
 	std::cout << "Width: " << width << ", Height: " << height << std::endl;
 }
 
-void Window::SetCurrentContext(InputManager* manager)
+void Window::CharacterCallback(GLFWwindow* window, KeyStroke stroke)
+{
+	_rawInput.push_back(stroke);
+}
+
+void Window::SetCurrentContext()
 {
 	glfwMakeContextCurrent(_window);
 
@@ -38,14 +34,26 @@ void Window::SetCurrentContext(InputManager* manager)
 		self.OnResize(window, width, height);
 	};
 	glfwSetWindowSizeCallback(_window, resize_callback);
-	
-	glfwSetWindowUserPointer(_window, manager);
-	GLFWcharfun key_callback = [](GLFWwindow* window, GLuint codepoint) -> void
+
+	GLFWkeyfun key_callback = [](GLFWwindow* window, int key, int scancode, int action, int mods) -> void
 	{
-		auto& self = *static_cast<InputManager*>(glfwGetWindowUserPointer(window));
-		self.CharacterCallback(window, codepoint);
+		auto& self = *static_cast<Window*>(glfwGetWindowUserPointer(window));
+
+		KeyStroke stroke{key, scancode, action, mods};
+		self.CharacterCallback(window, stroke);
 	};
-	glfwSetCharCallback(_window, key_callback);
+	glfwSetKeyCallback(_window, key_callback);
+}
+
+std::vector<KeyStroke> Window::GetRawInput() {
+	std::vector<KeyStroke> data = _rawInput;
+	ClearInput();
+	return data;
+}
+
+void Window::ClearInput()
+{
+	_rawInput.clear();
 }
 
 Window::Window(int width, int height, char* name, bool fullscreen)
@@ -53,6 +61,8 @@ Window::Window(int width, int height, char* name, bool fullscreen)
 	, _screenHeight(height)
 	, _aspect((float)_screenWidth / (float)_screenHeight)
 	, _window(nullptr)
+	, _rawInput(std::vector<KeyStroke>())
+
 {
 	GLFWmonitor* monitor = fullscreen ? glfwGetPrimaryMonitor() : NULL;
 	_window = glfwCreateWindow(width, height, name, monitor, NULL);	

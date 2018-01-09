@@ -1,24 +1,26 @@
 #pragma once
-#ifndef __SCENEMANAGEGER_H_
-#define __SCENEMANAGEGER_H_
+#ifndef SCENEMANAGEGER_H_
+#define SCENEMANAGEGER_H_
+
+// Additional includes
 
 namespace cg3d {
-	// Enumerations
-	enum class SceneID {
-		BASE = 000,
-		GAME = 001,
-	};
-
 	// Forward declaration
 	class Engine;
 
 	class Scene
 	{
+	protected:
+		SceneID					    _ID;
+		std::vector<int>			_keyConfig;
 	public:
 		virtual void Load() = 0;
+		virtual void ProcessInput(std::vector<std::pair<int, int>>) = 0;
 		virtual void Update(float delta) = 0;
 		virtual void Redraw() = 0;
 		virtual void Unload() = 0;
+
+		std::vector<int> GetControlScheme() { return _keyConfig; }
 	};
 
 	class SceneManager
@@ -26,14 +28,13 @@ namespace cg3d {
 		
 	friend class Engine;
 	private:
-		Scene* _currentScene;
-		
-		SceneManager();
-		Scene* CreateScene(SceneID id);
+		Scene* _currentScene;		
+		Scene* CreateScene(SceneID id, Engine* delegate);
 	public:
+		SceneManager();
 		~SceneManager();
-		void ChangeScene(SceneID id);
+		void ChangeScene(SceneID id, Engine* delegate);
 	};
 }
 
-#endif // __SCENEMANAGEGER_H_
+#endif // !SCENEMANAGEGER_H_

@@ -11,10 +11,6 @@ using namespace cg3d;
 	#include "graphics/ShaderProgram.h"
 #endif // _SHADERPROGRAM_H_
 
-#ifndef __UTILITIES_H_
-	#include "Utilities.h"
-#endif // __UTILITIES_H_
-
 Mesh::Mesh(ShaderProgram *program)
 	: _program(program)
 {

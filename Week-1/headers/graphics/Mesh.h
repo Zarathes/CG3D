@@ -1,11 +1,7 @@
 #pragma once
-#ifndef __MESH_H_
+#ifndef MESH_H_
 
 // Additional includes
-#ifndef __glew_h__
-	#include <glew.h> // OpenGL
-#endif __glew_h__
-
 #include <glm.hpp>
 
 namespace cg3d {
@@ -47,4 +43,4 @@ namespace cg3d {
 		glm::mat4		_modelMatrix;
 	};
 }
-#endif // !__MESH_H_
+#endif // !MESH_H_

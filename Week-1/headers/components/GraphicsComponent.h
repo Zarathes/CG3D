@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __GRAPHICSCOMPONENT_H_
-#define __GRAPHICSCOMPONENT_H_
+#ifndef GRAPHICSCOMPONENT_H_
+#define GRAPHICSCOMPONENT_H_
 
 // Additional Includes
 #include <glm.hpp>
@@ -24,4 +24,4 @@ namespace cg3d
 	};
 }
 
-#endif // !__GRAPHICSCOMPONENT_H_
+#endif // !GRAPHICSCOMPONENT_H_

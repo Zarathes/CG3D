@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __APPLICATION_H_
-#define __APPLICATION_H_
+#ifndef APPLICATION_H_
+#define APPLICATION_H_
 
 // Defines
 #define MAXSAMPLES 100
@@ -45,4 +45,4 @@ private:
 	cg3d::Mesh	        *_cube;
 	cg3d::Mesh	        *_cube2;
 };
-#endif // !__APPLICATION_H_
+#endif // !APPLICATION_H_

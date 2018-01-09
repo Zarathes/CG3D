@@ -4,28 +4,6 @@
 using namespace cg3d;
 
 // Additional Includes
-#ifndef __glew_h__
-	#include <glew.h>
-#endif // !__glew_h__
-
-#ifndef _glfw3_h_
-	#include <GLFW\glfw3.h>
-#endif // !_glfw3_h_
-
-#ifndef __WINDOW_H_
-	#include  "Window.h"
-#endif __WINDOW_H_
-
-#ifndef __SCENEMANAGEGER_H_
-	#include "systems/SceneManager.h"
-#endif // !__SCENEMANAGEGER_H_
-
-#ifndef __INPUTMANAGER_H_
-	#include "systems/InputManager.h"
-#endif // !__INPUTMANAGER_H_
-
-#include "Utilities.h"
-
 #include <assert.h>
 
 // ----- Main -----
@@ -38,6 +16,11 @@ int main()
 	delete app;
 }
 
+Engine::Engine()
+	: _shouldClose(false)
+{
+}
+
 // ----- GameLoop -----
 // Core of the engine
 // This method is the beginning and end of
@@ -47,14 +30,11 @@ int main()
 void Engine::GameLoop()
 {
 	Initialize();
-
-	bool shouldQuit = false;
-	while (!shouldQuit)
+	while (!_shouldClose)
 	{
-		// poll Input
-		_inputManager->ProcessInput();
-		//_sceneManager->_currentScene->Update(0.0f);
-		//_sceneManager->_currentScene->Redraw();
+		_sceneManager->_currentScene->ProcessInput(_inputManager->ProcessRawInput(_window->GetRawInput()));
+		_sceneManager->_currentScene->Update(0.0f);
+		_sceneManager->_currentScene->Redraw();
 
 		/* Swap front and back buffers */
 		GLCall(glfwSwapBuffers(_window->_window));
@@ -73,24 +53,36 @@ void Engine::GameLoop()
 void Engine::Initialize()
 {
 	// Initialize glfw
-	assert(glfwInit() != -1);
+	if (glfwInit() != GLFW_TRUE)
+		std::cout << "Error: failed to intitialize glfw" << std::endl;
+	
+	_window = new Window(1920, 1080, "CG3D", false);
+	_window->SetCurrentContext();
+
+	if (GLint GlewInitResult = glewInit() != GLEW_OK)
+		std::cout << "Error: " << glewGetErrorString(GlewInitResult) << std::endl;
+	
+	std::cout << "OpenGL Initialized: " << glGetString(GL_VERSION) << std::endl;
 
 	// Init Memory
 	// Init Timer
-	_inputManager = new InputManager();
-	_window = new Window(1920, 1080, "CG3D", false);
-	_window->SetCurrentContext(_inputManager);
+	
+	_sceneManager = std::make_unique<SceneManager>();
+	_sceneManager->ChangeScene(SceneID::GAME, this);
+	
+	_inputManager = std::make_unique<InputManager>();
+	_inputManager->ChangeControlScheme(_sceneManager->_currentScene->GetControlScheme());
 
-	_sceneManager = new SceneManager();
+	_renderer = std::make_unique<RenderSystem>();
+	_renderer->Initialize();
 }
 
 void Engine::Finalize()
 {
-	// fin Input
-	// fin Scene
-	// fin Window
+	delete _window;
 	// fin Timer
 	// fin Memory
 	   
 	// fin OpenGL/GLEW/GLFW
+	glfwTerminate();
 }

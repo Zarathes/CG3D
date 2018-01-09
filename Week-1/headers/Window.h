@@ -1,13 +1,15 @@
 #pragma once
-#ifndef __WINDOW_H_
-#define __WINDOW_H_
+#ifndef WINDOW_H_
+#define WINDOW_H_
 
 // Structs
 typedef struct GLFWwindow GLFWwindow;
 
+// Additional includes
+
+
 namespace cg3d {
 	class Engine;
-	class InputManager;
 
 	class Window
 	{
@@ -18,10 +20,16 @@ namespace cg3d {
 
 		float _aspect;
 
+		std::vector<KeyStroke> _rawInput;
 		GLFWwindow *_window;
 
 		void OnResize(GLFWwindow* window, int width, int height);
-		void SetCurrentContext(InputManager* manager);
+		void CharacterCallback(GLFWwindow* window, KeyStroke stroke);
+
+		void SetCurrentContext();
+
+		std::vector<KeyStroke> GetRawInput();
+		void ClearInput();
 
 	public:
 		Window(int width, int height, char* name, bool fullscreen);
@@ -29,4 +37,4 @@ namespace cg3d {
 	};
 }
 
-#endif // !__WINDOW_H_
+#endif // !WINDOW_H_

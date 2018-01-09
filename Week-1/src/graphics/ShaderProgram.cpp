@@ -4,10 +4,6 @@
 using namespace cg3d;
 
 // Additional includes
-#ifndef _IOSTREAM_
-#include <iostream>
-#endif // !_IOSTREAM_
-
 #ifndef _FSTREAM_
 #include <fstream>
 #endif // !_FSTREAM_
@@ -15,10 +11,6 @@ using namespace cg3d;
 #ifndef _SSTREAM_
 #include <sstream>
 #endif // !_SSTREAM_
-
-#ifndef __UTILITIES_H_
-	#include "Utilities.h"
-#endif
 
 // ---------- Constructor -----------
 // 

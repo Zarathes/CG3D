@@ -1,19 +1,28 @@
 #include "systems/SceneManager.h"
 
+// Namespaces
 using namespace cg3d;
+
+#ifndef GAMESCENE_H_
+	#include "scenes/GameScene.h"
+#endif // !GAMESCENE_H_
+
 
 SceneManager::SceneManager()
 	: _currentScene(nullptr)
 {
 }
 
-Scene* SceneManager::CreateScene(SceneID id)
+Scene* SceneManager::CreateScene(SceneID id, Engine *delegate)
 {
 	Scene* scene = nullptr;
 
 	switch (id)
 	{
-	case cg3d::SceneID::BASE:
+	case SceneID::BASE:
+		break;
+	case SceneID::GAME:
+		scene = new GameScene(delegate);
 		break;
 	default:
 		break;
@@ -24,13 +33,14 @@ Scene* SceneManager::CreateScene(SceneID id)
 
 SceneManager::~SceneManager()
 {
-	delete _currentScene;
+	if (_currentScene != nullptr)
+		delete _currentScene;
 }
 
-void SceneManager::ChangeScene(SceneID id)
+void SceneManager::ChangeScene(SceneID id, Engine* delegate)
 {
 	if (_currentScene != nullptr)
 		delete _currentScene;
 
-	_currentScene = CreateScene(id);
+	_currentScene = CreateScene(id, delegate);
 }

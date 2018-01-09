@@ -1,13 +1,9 @@
 #pragma once
-#ifndef __SHADERPROGRAM_H_
+#ifndef SHADERPROGRAM_H_
 
 #ifndef _STRING_
 #include <string>
 #endif // !_STRING_
-
-#ifndef __glew_h__
-#include <glew.h> // OpenGL
-#endif __glew_h__
 
 namespace cg3d {
 	class ShaderProgram
@@ -49,4 +45,4 @@ namespace cg3d {
 		GLint				GetUniformLocation(const std::string& name) const;
 	};
 }
-#endif // __SHADERPROGRAM_H_
+#endif // !SHADERPROGRAM_H_
