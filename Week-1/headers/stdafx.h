@@ -1,4 +1,7 @@
 #pragma once
+
+#include <glm.hpp>
+
 #ifndef __glew_h__
 	#include <glew.h>
 #endif // !__glew_h__
@@ -14,6 +17,10 @@
 #ifndef _VECTOR_
 	#include <vector>
 #endif // !_VECTOR_
+
+#ifndef _MAP_
+#include <map>
+#endif // !_MAP_
 
 #ifndef _MEMORY_
 	#include <memory>

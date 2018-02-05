@@ -8,13 +8,15 @@ using namespace cg3d;
 	#include "systems/InputManager.h"
 #endif // !INPUTMANAGER_H_
 
+#ifndef ENGINE_H_
+	#include "Engine.h"
+#endif // !ENGINE_H_
 
 void Window::OnResize(GLFWwindow* window, int width, int height)
 {
 	_screenWidth = width;
 	_screenHeight = height;
-	_aspect = (float)_screenWidth / (float)_screenHeight;
-
+	_delegate->_renderer->ChangeFrustrum(width, height);
 	std::cout << "Width: " << width << ", Height: " << height << std::endl;
 }
 
@@ -23,7 +25,7 @@ void Window::CharacterCallback(GLFWwindow* window, KeyStroke stroke)
 	_rawInput.push_back(stroke);
 }
 
-void Window::SetCurrentContext()
+void Window::SetActiveWindow()
 {
 	glfwMakeContextCurrent(_window);
 
@@ -56,13 +58,13 @@ void Window::ClearInput()
 	_rawInput.clear();
 }
 
-Window::Window(int width, int height, char* name, bool fullscreen)
-	: _screenWidth(width)
+Window::Window(Engine* engine, int width, int height, char* name, bool fullscreen)
+	: _delegate(engine)
+	, _screenWidth(width)
 	, _screenHeight(height)
 	, _aspect((float)_screenWidth / (float)_screenHeight)
 	, _window(nullptr)
 	, _rawInput(std::vector<KeyStroke>())
-
 {
 	GLFWmonitor* monitor = fullscreen ? glfwGetPrimaryMonitor() : NULL;
 	_window = glfwCreateWindow(width, height, name, monitor, NULL);	

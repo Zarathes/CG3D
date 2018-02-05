@@ -35,12 +35,6 @@ void Engine::GameLoop()
 		_sceneManager->_currentScene->ProcessInput(_inputManager->ProcessRawInput(_window->GetRawInput()));
 		_sceneManager->_currentScene->Update(0.0f);
 		_sceneManager->_currentScene->Redraw();
-
-		/* Swap front and back buffers */
-		GLCall(glfwSwapBuffers(_window->_window));
-
-		/* Poll for and process events */
-		GLCall(glfwPollEvents());
 	}
 
 	Finalize();
@@ -56,8 +50,7 @@ void Engine::Initialize()
 	if (glfwInit() != GLFW_TRUE)
 		std::cout << "Error: failed to intitialize glfw" << std::endl;
 	
-	_window = new Window(1920, 1080, "CG3D", false);
-	_window->SetCurrentContext();
+	_window = std::make_shared<Window>(1920, 1080, "CG3D", false);
 
 	if (GLint GlewInitResult = glewInit() != GLEW_OK)
 		std::cout << "Error: " << glewGetErrorString(GlewInitResult) << std::endl;
@@ -75,11 +68,12 @@ void Engine::Initialize()
 
 	_renderer = std::make_unique<RenderSystem>();
 	_renderer->Initialize();
+	_window->SetActiveWindow();
+	_renderer->_activeWindow = _window;
 }
 
 void Engine::Finalize()
 {
-	delete _window;
 	// fin Timer
 	// fin Memory
 	   

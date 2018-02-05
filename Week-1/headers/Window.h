@@ -13,7 +13,7 @@ namespace cg3d {
 
 	class Window
 	{
-	friend class Engine;
+	friend class RenderSystem;
 	private:
 		int _screenWidth;
 		int _screenHeight;
@@ -21,19 +21,22 @@ namespace cg3d {
 		float _aspect;
 
 		std::vector<KeyStroke> _rawInput;
+
+		Engine*		_delegate;
 		GLFWwindow *_window;
 
 		void OnResize(GLFWwindow* window, int width, int height);
 		void CharacterCallback(GLFWwindow* window, KeyStroke stroke);
 
-		void SetCurrentContext();
 
 		std::vector<KeyStroke> GetRawInput();
 		void ClearInput();
 
 	public:
-		Window(int width, int height, char* name, bool fullscreen);
+		Window(Engine* engine, int width, int height, char* name, bool fullscreen);
 		~Window();
+		
+		void SetActiveWindow();
 	};
 }
 

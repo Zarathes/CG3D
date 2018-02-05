@@ -24,17 +24,16 @@ namespace cg3d
 
 	class Engine
 	{
-
 	private:
-		Window	     *_window;
+		std::shared_ptr<Window>	      _window;
 		std::unique_ptr<SceneManager> _sceneManager;
 		std::unique_ptr<InputManager> _inputManager;
-		std::unique_ptr<RenderSystem> _renderer;
 
 		void Initialize();		
 		void Finalize();
 	public:
 		bool _shouldClose;
+		std::unique_ptr<RenderSystem> _renderer;
 
 		Engine();
 		~Engine() {};
