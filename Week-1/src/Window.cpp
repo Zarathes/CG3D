@@ -12,6 +12,27 @@ using namespace cg3d;
 	#include "Engine.h"
 #endif // !ENGINE_H_
 
+Window::Window(Engine* engine, int width, int height, const char* name, bool fullscreen)
+	: _delegate(engine)
+	, _screenWidth(width)
+	, _screenHeight(height)
+	, _aspect((float)_screenWidth / (float)_screenHeight)
+	, _window(nullptr)
+	, _rawInput(std::vector<KeyStroke>())
+{
+	GLFWmonitor* monitor = fullscreen ? glfwGetPrimaryMonitor() : NULL;
+	_window = glfwCreateWindow(width, height, name, monitor, NULL);
+	SetActiveWindow();
+}
+
+Window::~Window()
+{
+	glfwDestroyWindow(_window);
+}
+
+
+#pragma warning(push)
+#pragma warning(disable:4100)
 void Window::OnResize(GLFWwindow* window, int width, int height)
 {
 	_screenWidth = width;
@@ -19,11 +40,12 @@ void Window::OnResize(GLFWwindow* window, int width, int height)
 	_delegate->_renderer->ChangeFrustrum(width, height);
 	std::cout << "Width: " << width << ", Height: " << height << std::endl;
 }
-
 void Window::CharacterCallback(GLFWwindow* window, KeyStroke stroke)
 {
+	std::cout << "Input: " << stroke._key << " " << ((stroke._action == KEY_PRESS) ? "Pressed" : (stroke._action == KEY_RELEASE) ? "Released" : "Repeat") << std::endl;
 	_rawInput.push_back(stroke);
 }
+#pragma warning(pop)
 
 void Window::SetActiveWindow()
 {
@@ -56,21 +78,4 @@ std::vector<KeyStroke> Window::GetRawInput() {
 void Window::ClearInput()
 {
 	_rawInput.clear();
-}
-
-Window::Window(Engine* engine, int width, int height, char* name, bool fullscreen)
-	: _delegate(engine)
-	, _screenWidth(width)
-	, _screenHeight(height)
-	, _aspect((float)_screenWidth / (float)_screenHeight)
-	, _window(nullptr)
-	, _rawInput(std::vector<KeyStroke>())
-{
-	GLFWmonitor* monitor = fullscreen ? glfwGetPrimaryMonitor() : NULL;
-	_window = glfwCreateWindow(width, height, name, monitor, NULL);	
-}
-
-Window::~Window()
-{
-	glfwDestroyWindow(_window);
 }

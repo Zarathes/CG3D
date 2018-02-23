@@ -17,7 +17,7 @@ namespace cg3d {
 		virtual void Load() = 0;
 		virtual void ProcessInput(std::vector<std::pair<int, int>>) = 0;
 		virtual void Update(float delta) = 0;
-		virtual void Redraw() = 0;
+		virtual void Redraw(float delta) = 0;
 		virtual void Unload() = 0;
 
 		std::vector<int> GetControlScheme() { return _keyConfig; }
@@ -29,11 +29,11 @@ namespace cg3d {
 	friend class Engine;
 	private:
 		Scene* _currentScene;		
-		Scene* CreateScene(SceneID id, Engine* delegate);
+		Scene* CreateScene(SceneID id, std::shared_ptr<Engine> delegate);
 	public:
 		SceneManager();
 		~SceneManager();
-		void ChangeScene(SceneID id, Engine* delegate);
+		void ChangeScene(SceneID id, std::shared_ptr<Engine> delegate);
 	};
 }
 

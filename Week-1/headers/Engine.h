@@ -22,7 +22,7 @@
 namespace cg3d
 {
 
-	class Engine
+	class Engine : public std::enable_shared_from_this<Engine>
 	{
 	private:
 		std::shared_ptr<Window>	      _window;

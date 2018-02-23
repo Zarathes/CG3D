@@ -29,14 +29,13 @@ namespace cg3d {
 		void CharacterCallback(GLFWwindow* window, KeyStroke stroke);
 
 
-		std::vector<KeyStroke> GetRawInput();
 		void ClearInput();
-
 	public:
-		Window(Engine* engine, int width, int height, char* name, bool fullscreen);
+		Window(Engine* engine, int width, int height, const char* name, bool fullscreen);
 		~Window();
 		
 		void SetActiveWindow();
+		std::vector<KeyStroke> GetRawInput();
 	};
 }
 

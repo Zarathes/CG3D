@@ -4,14 +4,12 @@
 using namespace cg3d;
 
 // Additional Includes
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
 
 #ifndef _SHADERPROGAM_H_ 
 	#include "graphics/ShaderProgram.h"
 #endif // _SHADERPROGRAM_H_
 
-Mesh::Mesh(ShaderProgram *program)
+Mesh::Mesh(std::shared_ptr<ShaderProgram> program)
 	: _program(program)
 {
 	_vertexCount = 48;
@@ -115,9 +113,8 @@ Mesh::Mesh(MeshData data)
 	, _rotations(data.rotations)
 	, _scales(data.scales)
 	, _alpha(data.alpha)
-{	
-	_program = new cg3d::ShaderProgram("res/shaders/Basic.shader");
-	
+	, _program(data.program)
+{		
 	_vertexCount = 48;
 	_indexCount = 36;
 
@@ -211,39 +208,4 @@ Mesh::Mesh(MeshData data)
 
 Mesh::~Mesh()
 {
-	delete _program;
-}
-
-void Mesh::Update(GLfloat dt)
-{
-	_rotations.x = _rotations.y + (10 * dt);
-	_rotations.y = _rotations.y + (10 * dt);
-	_rotations.z = _rotations.y + (10 * dt);
-	//_alpha = (sin((float)glfwGetTime()) + 1) / 2;
-
-	glm::mat4 translate = glm::translate(glm::mat4(1.0f), _position);
-	glm::mat4 rotateYaw = glm::rotate(glm::mat4(1.0f), glm::radians(_rotations.y), glm::vec3(0.0f, 1.0f, 0.0f)); // Yaw
-	glm::mat4 rotatePitch = glm::rotate(glm::mat4(1.0f), glm::radians(_rotations.z), glm::vec3(0.0f, 0.0f, 1.0f)); // Pitch
-	glm::mat4 rotateRoll = glm::rotate(glm::mat4(1.0f), glm::radians(_rotations.x), glm::vec3(1.0f, 0.0f, 0.0f)); // Roll	
-	glm::mat4 rotate = rotateYaw * rotatePitch * rotateRoll;
-	glm::mat4 scale = glm::scale(glm::mat4(1.0f), _scales);
-
-	_modelMatrix = translate * rotate * scale;
-}
-void Mesh::Draw(glm::mat4 viewProjMatrix)
-{
-	_program->BindShader();
-	_program->SetBufferData(_vertexCount, _vertices, _indexCount, _indices);
-
-	glm::mat4 MVP = viewProjMatrix * _modelMatrix;
-	_program->SetUniformMatrixf("MVP", &MVP[0][0]);
-	_program->SetUniformf("alpha", _alpha);
-
-	_program->SetVertexAttribute("position", 3, GL_FLOAT, sizeof(float) * 6, (void*)0);
-	_program->SetVertexAttribute("color", 3, GL_FLOAT, sizeof(float) * 6, (void*)(3 * sizeof(float)));
-
-	_program->DrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_INT, 0, true);
-
-	_program->DisableVertexAttributeArray("position");
-	_program->DisableVertexAttributeArray("color");
 }

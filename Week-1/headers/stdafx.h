@@ -1,6 +1,9 @@
 #pragma once
 
+#pragma warning(push)
+#pragma warning(disable:4201)
 #include <glm.hpp>
+#pragma warning(pop)
 
 #ifndef __glew_h__
 	#include <glew.h>
@@ -26,9 +29,12 @@
 	#include <memory>
 #endif // !_MEMORY_
 
+#pragma warning(push)
+#pragma warning(disable:4505)
 #ifndef UTILITIES_H_
 	#include "Utilities.h"
 #endif // !UTILITIES_H_
+#pragma warning(pop)
 
 #ifndef ENUMERATIONS_H_
 	#include "data\Enumerations.h"

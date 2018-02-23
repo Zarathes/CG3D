@@ -6,12 +6,12 @@
 
 namespace cg3d {
 	class Window;
-	class Engine;
 	class ShaderProgram;
 
 	class RenderSystem
 	{
 		friend class Engine;
+		friend class GameScene;
 	private:
 		int _viewWidth;
 		int _viewHeight;

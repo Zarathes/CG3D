@@ -2,7 +2,6 @@
 #ifndef MESH_H_
 
 // Additional includes
-#include <glm.hpp>
 
 namespace cg3d {
 	class ShaderProgram;
@@ -13,18 +12,16 @@ namespace cg3d {
 		glm::vec3		rotations;
 		glm::vec3		scales;
 		float			alpha;
-		ShaderProgram	*program;
+		std::shared_ptr<ShaderProgram>	program;
 	};
 
 	class Mesh
 	{
+	friend class GraphicsComponent;
 	public:
-						Mesh(ShaderProgram *program);
+						Mesh(std::shared_ptr<ShaderProgram> program);
 						Mesh(MeshData data);
 						~Mesh();
-
-		void			Update(GLfloat dt);
-		void			Draw(glm::mat4 viewProjMatrix);
 	private:
 
 		GLuint			_vertexCount;
@@ -33,7 +30,7 @@ namespace cg3d {
 		GLfloat*		_vertices;
 		GLuint*			_indices;
 
-		ShaderProgram	*_program;
+		std::shared_ptr<ShaderProgram> _program;
 		
 		glm::vec3		_position;
 		glm::vec3		_rotations;

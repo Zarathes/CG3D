@@ -3,14 +3,14 @@
 #define GRAPHICSCOMPONENT_H_
 
 // Additional Includes
-#include <glm.hpp>
+#include "Entity.h"
 
 namespace cg3d
 {
 	// Forward declarations
 	class Mesh;
 
-	class GraphicsComponent
+	class GraphicsComponent : public Component
 	{
 	public:
 		glm::vec3		_position;
@@ -20,6 +20,10 @@ namespace cg3d
 
 		GraphicsComponent();
 		~GraphicsComponent();
+		
+		void Initialize(std::shared_ptr<Entity> parent);
+		void Update(float dt);
+		void Finalize();
 	private:
 	};
 }

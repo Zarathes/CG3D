@@ -13,7 +13,7 @@ SceneManager::SceneManager()
 {
 }
 
-Scene* SceneManager::CreateScene(SceneID id, Engine *delegate)
+Scene* SceneManager::CreateScene(SceneID id, std::shared_ptr<Engine> delegate)
 {
 	Scene* scene = nullptr;
 
@@ -37,7 +37,7 @@ SceneManager::~SceneManager()
 		delete _currentScene;
 }
 
-void SceneManager::ChangeScene(SceneID id, Engine* delegate)
+void SceneManager::ChangeScene(SceneID id, std::shared_ptr<Engine> delegate)
 {
 	if (_currentScene != nullptr)
 		delete _currentScene;

@@ -1,7 +1,9 @@
 #shader vertex
 #version 450 core
 
-uniform mat4 MVP;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
 layout(location = 0) in vec4 position;
 layout(location = 1) in vec4 color;
@@ -10,7 +12,7 @@ out vec4 f_color;
 
 void main() 
 {
-	gl_Position = MVP * position;
+	gl_Position = (proj * view * model) * position;
 	f_color = color; 
 };
 
