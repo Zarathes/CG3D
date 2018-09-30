@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{79744529-F478-4333-8855-269BD4340064}</ProjectGuid>
+    <RootNamespace>Week1</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectName>CG3D</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\ImGui.props" />
+    <Import Project="..\GLEW_x86.props" />
+    <Import Project="..\GLFW_x86.props" />
+    <Import Project="..\GLM.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\GLEW_x86.props" />
+    <Import Project="..\GLFW_x86.props" />
+    <Import Project="..\GLM.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\ImGui.props" />
+    <Import Project="..\GLFW_x64.props" />
+    <Import Project="..\GLEW_x64.props" />
+    <Import Project="..\GLM.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\GLEW_x64.props" />
+    <Import Project="..\GLFW_x64.props" />
+    <Import Project="..\GLM.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)headers;$(ProjectDir)vendor\imgui\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <ForcedIncludeFiles>StdAfx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <TreatWarningAsError>false</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)res" "$(SolutionDir)\bin\$(Platform)\$(Configuration)\res" /e /y /i /r</Command>
+    </PostBuildEvent>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)headers;$(ProjectDir)vendor\imgui\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <ForcedIncludeFiles>StdAfx.h;</ForcedIncludeFiles>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)res" "$(SolutionDir)\bin\$(Platform)\$(Configuration)\res" /e /y /i /r</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)headers;$(ProjectDir)vendor\imgui\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <ForcedIncludeFiles>StdAfx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)res" "$(SolutionDir)\bin\$(Platform)\$(Configuration)\res" /e /y /i /r</Command>
+    </PostBuildEvent>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)headers;$(ProjectDir)vendor\imgui\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <ForcedIncludeFiles>StdAfx.h;</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)res" "$(SolutionDir)\bin\$(Platform)\$(Configuration)\res" /e /y /i /r</Command>
+    </PostBuildEvent>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\editor\EditorOverlay.cpp" />
+    <ClCompile Include="src\systems\ComponentManager.cpp" />
+    <ClCompile Include="src\components\CameraComponent.cpp" />
+    <ClCompile Include="src\components\GraphicsComponent.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\entities\CameraEntity.cpp" />
+    <ClCompile Include="src\entities\Entity.cpp" />
+    <ClCompile Include="src\entities\GraphicsEntity.cpp" />
+    <ClCompile Include="src\graphics\Buffer.cpp" />
+    <ClCompile Include="src\graphics\Scene.cpp" />
+    <ClCompile Include="src\systems\input\Keyboard.cpp" />
+    <ClCompile Include="src\systems\input\Mouse.cpp" />
+    <ClCompile Include="src\systems\resources\ResourceManager.cpp" />
+    <ClCompile Include="src\systems\resources\VoxResource.cpp" />
+    <ClCompile Include="src\systems\timer\Timer.cpp" />
+    <ClCompile Include="src\systems\timer\TimerManager.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
+    <ClCompile Include="src\utilities\Subject.cpp" />
+    <ClCompile Include="src\worlds\GameWorld.cpp" />
+    <ClCompile Include="src\systems\EntityManager.cpp" />
+    <ClCompile Include="src\systems\input\InputManager.cpp" />
+    <ClCompile Include="src\graphics\Mesh.cpp" />
+    <ClCompile Include="src\graphics\ShaderProgram.cpp" />
+    <ClCompile Include="src\systems\RenderSystem.cpp" />
+    <ClCompile Include="src\systems\WorldManager.cpp" />
+    <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="vendor\imgui\src\imgui.cpp" />
+    <ClCompile Include="vendor\imgui\src\imgui_demo.cpp" />
+    <ClCompile Include="vendor\imgui\src\imgui_draw.cpp" />
+    <ClCompile Include="vendor\imgui\src\imgui_impl_glfw.cpp" />
+    <ClCompile Include="vendor\imgui\src\imgui_impl_opengl3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\Basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\data\Events.h" />
+    <ClInclude Include="headers\editor\EditorOverlay.h" />
+    <ClInclude Include="headers\systems\ComponentManager.h" />
+    <ClInclude Include="headers\components\CameraComponent.h" />
+    <ClInclude Include="headers\components\IComponent.h" />
+    <ClInclude Include="headers\data\Enumerations.h" />
+    <ClInclude Include="headers\components\GraphicsComponent.h" />
+    <ClInclude Include="headers\data\KeyCodes.h" />
+    <ClInclude Include="headers\Engine.h" />
+    <ClInclude Include="headers\entities\CameraEntity.h" />
+    <ClInclude Include="headers\entities\Entity.h" />
+    <ClInclude Include="headers\entities\GraphicsEntity.h" />
+    <ClInclude Include="headers\graphics\Buffer.h" />
+    <ClInclude Include="headers\graphics\Scene.h" />
+    <ClInclude Include="headers\systems\input\Keyboard.h" />
+    <ClInclude Include="headers\systems\input\Mouse.h" />
+    <ClInclude Include="headers\systems\resources\Resource.h" />
+    <ClInclude Include="headers\systems\resources\ResourceManager.h" />
+    <ClInclude Include="headers\systems\resources\VoxResource.h" />
+    <ClInclude Include="headers\systems\timer\Timer.h" />
+    <ClInclude Include="headers\systems\timer\TimerManager.h" />
+    <ClInclude Include="headers\Transform.h" />
+    <ClInclude Include="headers\utilities\Observer.h" />
+    <ClInclude Include="headers\utilities\Subject.h" />
+    <ClInclude Include="headers\worlds\GameWorld.h" />
+    <ClInclude Include="headers\stdafx.h" />
+    <ClInclude Include="headers\data\Structs.h" />
+    <ClInclude Include="headers\systems\EntityManager.h" />
+    <ClInclude Include="headers\systems\input\InputManager.h" />
+    <ClInclude Include="headers\graphics\Mesh.h" />
+    <ClInclude Include="headers\graphics\ShaderProgram.h" />
+    <ClInclude Include="headers\systems\RenderSystem.h" />
+    <ClInclude Include="headers\systems\WorldManager.h" />
+    <ClInclude Include="headers\utilities\Utilities.h" />
+    <ClInclude Include="headers\graphics\Window.h" />
+    <ClInclude Include="headers\worlds\IWorld.h" />
+    <ClInclude Include="vendor\imgui\headers\imconfig.h" />
+    <ClInclude Include="vendor\imgui\headers\imgui.h" />
+    <ClInclude Include="vendor\imgui\headers\imgui_impl_glfw.h" />
+    <ClInclude Include="vendor\imgui\headers\imgui_impl_opengl3.h" />
+    <ClInclude Include="vendor\imgui\headers\imgui_internal.h" />
+    <ClInclude Include="vendor\imgui\headers\stb_rect_pack.h" />
+    <ClInclude Include="vendor\imgui\headers\stb_textedit.h" />
+    <ClInclude Include="vendor\imgui\headers\stb_truetype.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
